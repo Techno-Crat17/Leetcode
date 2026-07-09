@@ -2,27 +2,27 @@ class Solution {
 public:
     long long sumAndMultiply(int n) {
         
-        int div=1;
-        while(n/div >=10){
-            div*=10;
-        }
+        //brute force
 
         long long x=0;
-        long sum=0;
+        int sum=0;
 
-        while(div>0){
-            int d=n/div;
-
+        while(n>0){
+            int d=n%10;
             if(d!=0){
                 x=x*10+d;
                 sum+=d;
             }
-
-            n%=div;
-
-            div/=10;
+            n=n/10;
         }
 
-        return x * sum;
+        long long y=0;
+        while(x>0){
+            int d=x%10;
+            y=y*10+d;
+            x=x/10;
+        }
+
+        return sum*y;
     }
 };
