@@ -1,9 +1,12 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+      
         int n=nums.size();
+         
+        if(nums.size()<3) return {};
 
+          sort(nums.begin(),nums.end());
         set<vector<int>> ans;
 
         for(int i=0;i<n-2;i++){
