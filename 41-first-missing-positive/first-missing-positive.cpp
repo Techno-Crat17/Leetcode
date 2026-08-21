@@ -4,17 +4,9 @@ public:
         int n = nums.size();
         int i = 0;
         
-        while (i < n) {
-            
-            long long correctIdx = (long long)nums[i] - 1; 
-            
-            if (nums[i] > 0 && nums[i] <= n && nums[i] != nums[correctIdx]) {
-                swap(nums[i], nums[correctIdx]);
-            } else {
-                i++; // Only advance when current element is in its final spot
-            }
+        for(int i=0;i<n;i++){
+            while(nums[i]>0 && nums[i]<=n && nums[nums[i]-1]!=nums[i]) swap(nums[i],nums[nums[i]-1]);
         }
-        
         
         for (int j = 0; j < n; j++) {
             if (nums[j] != j + 1) {
