@@ -2,7 +2,7 @@ class Solution {
 public:
     int totalNumbers(vector<int>& digits) {
 
-        map<int,int> mp;
+        int cnt=0;
         vector<int> freq(10, 0);
 
         for (int x : digits)
@@ -25,9 +25,9 @@ public:
                     break;
                 }
             }
-            if(possible ) mp[i]++;
+            if(possible ) cnt++;
         }
     
-        return mp.size();
+        return cnt;
     }
 };
