@@ -5,6 +5,8 @@ public:
        
         for(int x:nums) mp[x]++;
 
+        // f isliye check ho rahi hai ki window bas ek baar apper ,in whole window case every ele in a window so freq dn matter
+
         if(k==1){//first ele
             int ans=-1;
 
@@ -14,7 +16,7 @@ public:
             return ans;
         }
 
-        if(k==nums.size()){//whole window
+        if(k==nums.size()){//whole window 
             return *max_element(nums.begin(),nums.end());
         }
 
