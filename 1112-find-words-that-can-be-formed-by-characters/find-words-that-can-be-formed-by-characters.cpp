@@ -2,23 +2,24 @@ class Solution {
 public:
     int countCharacters(vector<string>& words, string chars) {
 
-        int freq[26]={0};
+        unordered_map<char,int> mp;
 
         for(char c:chars){
-            freq[c-'a']++;
+            mp[c]++;
         }
         int ans=0;
         for(string x:words){
-            int need[26]={0};
+            unordered_map<char,int> temp=mp;//reintializing for every word
 
-            for(char c:x) need[c-'a']++;
+            
             bool possible=true;
 
-            for(int i=0;i<26;i++){
-                if(need[i]>freq[i]) {
+            for(char ch:x){
+                if(temp.find(ch)==temp.end() || temp[ch]==0) {
                     possible=false;
                     break;
                 }
+                temp[ch]--;
             }
 
             if(possible) ans+=x.length();
