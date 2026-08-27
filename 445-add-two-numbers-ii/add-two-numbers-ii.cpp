@@ -1,54 +1,52 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
+
+    ListNode* reverse(ListNode* head) {
+        ListNode* prev = nullptr;
+
+        while (head != nullptr) {
+            ListNode* next = head->next;
+            head->next = prev;
+            prev = head;
+            head = next;
+        }
+
+        return prev;
+    }
+
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 
-        stack<int> s1,s2;
+        
+        l1 = reverse(l1);
+        l2 = reverse(l2);
 
-        while(l1){
-            s1.push(l1->val);
-            l1=l1->next;
-        }
-        
-        
-        while(l2){
-            s2.push(l2->val);
-            l2=l2->next;
-        }
+      
+        ListNode* dummy = new ListNode(-1);
+        ListNode* curr = dummy;
 
         int carry = 0;
-        ListNode* head = nullptr;
 
-        while(!s1.empty() || !s2.empty() || carry){
-            int sum=carry;
+        while (l1 != nullptr || l2 != nullptr || carry != 0) {
 
-            if(!s1.empty()){
-                sum+=s1.top();
-                s1.pop();
+            int sum = carry;
+
+            if (l1 != nullptr) {
+                sum += l1->val;
+                l1 = l1->next;
             }
 
-            if(!s2.empty()){
-                sum+=s2.top();
-                s2.pop();
+            if (l2 != nullptr) {
+                sum += l2->val;
+                l2 = l2->next;
             }
 
-            ListNode * newNode=new ListNode(sum %10);
-            carry=sum/10;
+            carry = sum / 10;
 
-            //insert at head
-            newNode->next=head;
-            head=newNode;
+            curr->next = new ListNode(sum % 10);
+            curr = curr->next;
         }
 
-        return head;
+        // Reverse answer back to MSB first
+        return reverse(dummy->next);
     }
 };
