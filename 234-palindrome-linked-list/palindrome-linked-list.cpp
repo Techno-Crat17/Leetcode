@@ -19,9 +19,11 @@ public:
         }
 
         int i=0;
-        int n=ans.size();
-        for(int i=0;i<n/2;i++){
-            if(ans[i]!=ans[n-i-1]) return false;
+        int j=ans.size()-1;
+        while(i<j){
+            if(ans[i]!=ans[j]) return false;
+            i++;
+            j--;
         }
 
         return true;
