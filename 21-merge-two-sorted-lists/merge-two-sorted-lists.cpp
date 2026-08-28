@@ -10,28 +10,21 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* a, ListNode * b) {
-        // SC = O(1)
-        ListNode * c = new ListNode(-1);
-        ListNode * temp = c;//temp is at dummy for traversal
-        while(a!=NULL && b!=NULL){
-            if(a->val<=b->val){
-                temp->next=a;//temp to a
-                a=a->next;//mov
-                temp = temp ->next;
-            }
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
 
-            else{
-                temp->next=b;
-          
-             b=b->next;
-                temp = temp ->next;
-
-            }
+        if(!list1) return list2;
+        if(list2==nullptr) return list1;
+        ListNode * res;
+        if(list1->val<list2->val){
+                res=list1;
+                res->next=mergeTwoLists(list1->next,list2);
         }
-        if(a==NULL) temp->next = b;// if a list ends so temp connected reamining of b
-        else temp->next = a;
+        else{
+            res=list2;
+            res->next=mergeTwoLists(list2->next,list1);
+        }
+
+        return res;
         
-        return c->next;
     }
 };
