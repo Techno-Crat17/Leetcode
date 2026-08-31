@@ -11,41 +11,37 @@
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-        int idx=1;
-        int fidx=-1;
-        int sidx=-1;
-        int fidx2=-1;
-        int sidx2=-1;
-        int mind=INT_MAX;
-        ListNode * a=head;
-        ListNode * b=head->next;
-        ListNode * c=head->next->next;
-        while(c){
-            if(b->val>a->val && b->val>c->val || b->val<a->val && b->val<c->val){
-                //max distance
-                if(fidx==-1) fidx=idx;
-                else sidx=idx;
-                // min distance
-                fidx2=sidx2;
-                sidx2=idx;
-                if(fidx2!=-1){
-                int d=sidx2-fidx2;
-                mind=min(mind,d);//check between every found recent nodes
+
+        int firstCI = 0;
+        int prevCI = 0;
+        int CI = 1;
+
+        ListNode* currentN = head->next;
+        ListNode* prevN = head;
+        int mindist = INT_MAX, maxdist = -1;
+
+        while (currentN->next) {
+            if ((currentN->val > currentN->next->val &&
+                 prevN->val < currentN->val) ||
+                (currentN->val < currentN->next->val &&
+                 prevN->val > currentN->val)) {
+                if (firstCI == 0) {
+                    firstCI = CI;
+                    prevCI = CI;
+                } else {
+                    mindist = min(mindist, CI - prevCI);
+                    prevCI = CI;
                 }
-                
-
             }
-            a=a->next;
-            b=b->next;
-            c=c->next;
-            idx++;
+            prevN = currentN;
+            currentN = currentN->next;
+            CI++;
         }
-       
-        if(sidx==-1) return {-1,-1};
-        int maxd=sidx-fidx;
-        
 
-        return {mind,maxd};
-        
+        if (mindist != INT_MAX) {
+            maxdist = prevCI - firstCI;
+        }
+
+         return {mindist == INT_MAX ? -1 : mindist, maxdist};
     }
 };
