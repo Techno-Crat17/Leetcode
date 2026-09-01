@@ -10,40 +10,28 @@
  */
 class Solution {
 public:
-ListNode* merge(ListNode* a, ListNode * b) {
-        // SC = O(1)
-        ListNode * c = new ListNode(-1);
-        ListNode * temp = c;
-        while(a!=NULL && b!=NULL){
-            if(a->val<=b->val){
-                temp->next=a;
-                a=a->next;
-                temp = temp ->next;
-            }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<int,vector<int>,greater<int>> pq;
 
-            else{
-                temp->next=b;
-          
-             b=b->next;
-                temp = temp ->next;
-
+        for( auto head:lists){
+            while(head){
+            pq.push(head->val);
+            head=head->next;
             }
         }
-        if(a==NULL) temp->next = b;
-        else temp->next = a;
+
         
-        return c->next;
-    }
-    ListNode* mergeKLists(vector<ListNode*>& arr) {
-       if(arr.empty()) return nullptr;
+        ListNode dummy(-1);
+        ListNode * tail=&dummy;
 
-       ListNode *  result=arr[0];
+        while(!pq.empty()){
+            int val=pq.top(); pq.pop();
 
-       for(int i=1;i<arr.size();i++){
-        result=merge(result,arr[i]);
-       }
+            tail->next=new ListNode (val);
+            tail=tail->next;
+        }
 
-        return result;;
+        return dummy.next;
         
     }
 };
