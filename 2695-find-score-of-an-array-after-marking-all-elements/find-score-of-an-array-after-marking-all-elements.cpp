@@ -1,23 +1,22 @@
 class Solution {
+    typedef pair<int,int> P;
 public:
     long long findScore(vector<int>& nums) {
-        vector<pair<int, int>> uv;
+        priority_queue<P,vector<P>,greater<P>> pq;
 
         for (int i = 0; i < nums.size(); i++) {
-            uv.push_back({nums[i], i});
+            pq.push({nums[i], i});
         }
 
-        
-        sort(uv.begin(), uv.end());
 
         vector<bool> visited(nums.size(), false);
 
         long long score = 0;
 
-        for (auto p : uv) {
-            int num = p.first;
-            int idx = p.second;
-
+        while(!pq.empty()){
+            auto p=pq.top();pq.pop();
+            int idx=p.second;
+            int num=p.first;
             if (visited[idx])
                 continue;
 
