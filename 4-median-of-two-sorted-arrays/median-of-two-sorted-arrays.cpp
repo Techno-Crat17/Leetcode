@@ -10,6 +10,7 @@ public:
 
         for(int k=0;k<=mid;k++){
             prev=curr;
+            //nums1 se ele tab uthayege jab nums1 bacha ho ya(or) nums2 bada ho ya OOb ho
             if(i<n && (j>=m || nums1[i]<nums2[j])) {
                 curr=nums1[i++];
             }
@@ -18,7 +19,8 @@ public:
 
         if((m+n)%2==1) return curr;
 
-        return (prev+curr)/2.0;
+        return (prev+curr)/2.0;//for even number
+        
         
     }
 };
