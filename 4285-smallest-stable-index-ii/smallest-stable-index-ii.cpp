@@ -10,13 +10,13 @@ public:
         }
 
         vector<int>left(n,INT_MIN);
-       left[0] = nums[0]; 
-        for (int i = 1; i < n; i++) {
-            left[i] = max(nums[i], left[i - 1]);
-        }
-
-        for(int i=0;i<n;i++){
-            if(left[i]-rightmin[i]<=k) return i;
+       int running_max = nums[0];
+        for (int i = 0; i < n; i++) {
+            running_max = max(running_max, nums[i]);
+            
+            if ((long long)running_max - rightmin[i] <= k) {
+                return i;
+            }
         }
         return -1;
     }
