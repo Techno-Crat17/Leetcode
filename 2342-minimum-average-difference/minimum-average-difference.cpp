@@ -14,7 +14,7 @@ public:
             Lsum += nums[i];
             long long Rsum = Tsum - Lsum;
 
-            long long right_count = (i == n - 1) ? 1 : (n - avg_mark);
+            long long right_count = (i == n - 1) ? 1 : (n - avg_mark);// at last idx we handle division by zero
             long long left_val = Lsum / avg_mark;
             long long right_val = Rsum /right_count;
             
