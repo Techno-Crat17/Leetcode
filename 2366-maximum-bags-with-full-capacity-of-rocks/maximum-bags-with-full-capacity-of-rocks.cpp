@@ -10,15 +10,13 @@ public:
         sort(need.begin(),need.end());
 
         int cnt=0;
-        int i=0;
-        while(additionalRocks >0 && i<n){
-            if(need[i]<=additionalRocks){
-                additionalRocks-=need[i];
-                cnt++;
-            }
-            i++;
+       for(int x:need){
+        if(additionalRocks>=x){
+            additionalRocks-=x;
+            cnt++;
         }
-
+        else break;
+       }
         return cnt;
     }
 };
