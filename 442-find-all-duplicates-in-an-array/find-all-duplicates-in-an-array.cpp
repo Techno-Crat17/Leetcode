@@ -1,20 +1,15 @@
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
-
-        int n=nums.size();
-        int i=0;
-
-        while( i < n){
-            int cidx=nums[i]-1;
-
-            if(nums[i]!=nums[cidx]) swap(nums[i],nums[cidx]);
-
-            else i++;
-        }
+        int n = nums.size();
         vector<int> ans;
-        for(int j=0;j<n;j++){
-            if(nums[j]!=j+1) ans.push_back(nums[j]);
+        for(int j = 0; j < n; j++) {
+            int x = abs(nums[j]); // Map value to its 1-based target index
+            
+            if(nums[x - 1] < 0) 
+                ans.push_back(x); // Already negative means we've seen 'x' before (duplicate)
+            else 
+                nums[x - 1] = -nums[x - 1]; // First time seeing 'x', mark index as visited
         }
         return ans;
     }
