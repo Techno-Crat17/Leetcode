@@ -10,16 +10,16 @@ class Solution {
     }
 public:
     bool isHappy(int n) {
-
-        int slow = n;
-        int fast = getNext(n);
         
-        while (fast != 1 && slow != fast) {
-            slow = getNext(slow);
-            fast = getNext(getNext(fast));
+        unordered_set<int> st;
+        
+        while(n!=1 && !st.count(n)){//n agar 1 reach kar gaya exit aur map koi element pehle hi toh cycle never reach 1
+            st.insert(n);
+            n=getNext(n); 
+
         }
         
-        return fast == 1;
+        return n==1;
         
     }
 };
