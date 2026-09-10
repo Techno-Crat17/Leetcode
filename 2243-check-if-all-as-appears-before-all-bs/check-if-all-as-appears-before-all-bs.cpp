@@ -2,10 +2,11 @@ class Solution {
 public:
     bool checkString(string s) {
 
-        string f="ba";
-
-        if(s.contains(f)) return false;
-
+       for (int i = 0; i < s.length() - 1; i++) {
+            if (s[i] == 'b' && s[i + 1] == 'a') {
+                return false;
+            }
+        }
         return true;
         
     }
