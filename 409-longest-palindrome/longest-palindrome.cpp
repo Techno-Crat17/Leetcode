@@ -2,21 +2,26 @@ class Solution {
 public:
     int longestPalindrome(string s) {
 
-        map<char,int> mp;
+        map<char, int> mp;
 
-        for(char x:s) mp[x]++;
+        for (char x : s)
+            mp[x]++;
 
-        int cnt=0;
-        bool oddflag=false;
+        int cnt = 0;
+        bool oddflag = false;
 
+        for (auto [key, value] : mp) {
+            if (value % 2 == 0)
+                cnt += value;
 
-        for(auto [key,value] : mp){
-            cnt+=(value/2)*2;//handle odd case > 1 also
-
-            if(value%2==1) oddflag=true;
+            if (value % 2 == 1) {
+                if (oddflag != true) {//only one odd freq used
+                    oddflag = true;
+                    cnt += value;
+                } else
+                    cnt += value - 1;// after finding find first odd freq and we -1 to make it even count
+            }
         }
-        
-        if(oddflag) cnt++;
 
         return cnt;
     }
