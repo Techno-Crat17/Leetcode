@@ -14,9 +14,11 @@ public:
 
             while(zerocnt>1){
                 if(nums[l]==0) zerocnt--;
-                l++;
+                l++;//l ab start and non zero ele pe hai
             }
 
+            // Lekin ek zero (ya ek element) compulsory delete karna hai,(ws=r-l+1)
+            // isliye remaining length = (r - l + 1) - 1 = (r - l)
             maxlen=max(r-l,maxlen);
             r++;
         }
